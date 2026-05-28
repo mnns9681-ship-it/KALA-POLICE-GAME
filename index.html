@@ -112,6 +112,15 @@
             <div class="setup-actions">
                 <div class="round-setting">
                     <label>ರೌಂಡ್ ಸಂಖ್ಯೆ:</label>
+<div class="round-presets">
+    <button id="round-btn-5" class="round-preset-btn" onclick="setRounds(5)">5</button>
+
+    <button id="round-btn-10" class="round-preset-btn active" onclick="setRounds(10)">10</button>
+
+    <button id="round-btn-20" class="round-preset-btn" onclick="setRounds(20)">20</button>
+
+    <button id="round-btn-50" class="round-preset-btn" onclick="setRounds(50)">50</button>
+</div>
                     <div class="round-selector">
                         <button onclick="changeRounds(-1)">−</button>
                         <span id="round-count">3</span>

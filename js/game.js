@@ -154,7 +154,21 @@ function startRound() {
     while (currentDeck.length < gameState.players.length) {
         currentDeck.push(ROLE_PRAJA);
     }
-    
+    // Quick Round Presets
+function setRounds(rounds) {
+    gameState.maxRounds = rounds;
+    document.getElementById('round-count').textContent = rounds;
+
+    // Optional active button effect
+    document.querySelectorAll('.round-preset-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    const activeBtn = document.getElementById(`round-btn-${rounds}`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+}
     // Shuffle
     gameState.roles = currentDeck.sort(() => Math.random() - 0.5);
     

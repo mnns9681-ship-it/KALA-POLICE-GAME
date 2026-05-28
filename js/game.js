@@ -41,9 +41,9 @@ let gameState = {
 
 // Roles Definition
 const ROLE_RAJA = { id: 'raja', name: 'ರಾಜ', points: 1000, icon: '👑', desc: 'ನೀವು ರಾಜ್ಯದ ಒಡೆಯ.', color: 'role-raja' };
-const ROLE_MANTRI = { id: 'mantri', name: 'ಮಂತ್ರಿ', points: 800, icon: '🧙', desc: 'ಕಾಳನನ್ನು ಪತ್ತೆಹಚ್ಚಿ.', color: 'role-mantri' };
+const ROLE_MANTRI = { id: 'mantri', name: 'ಮಂತ್ರಿ', points: 800, icon: '🧙', desc: 'ಕಳ್ಳನನ್ನು ಪತ್ತೆಹಚ್ಚಿ.', color: 'role-mantri' };
 const ROLE_POLICE = { id: 'police', name: 'ಪೋಲೀಸ್', points: 500, icon: '🚔', desc: 'ಕಾಳನನ್ನು ಬಂಧಿಸಿ.', color: 'role-police' };
-const ROLE_KALA = { id: 'kala', name: 'ಕಾಳ', points: 0, icon: '🦹', desc: 'ಸಿಕ್ಕಿಬೀಳದಂತೆ ಜಾಗರೂಕರಾಗಿರಿ!', color: 'role-kala' };
+const ROLE_KALA = { id: 'kala', name: 'ಕಳ್ಳ', points: 0, icon: '💰', desc: 'ಸಿಕ್ಕಿಬೀಳದಂತೆ ಜಾಗರೂಕರಾಗಿರಿ!', color: 'role-kala' };
 const ROLE_PRAJA = { id: 'praja', name: 'ಪ್ರಜೆ', points: 200, icon: '🧑‍🌾', desc: 'ಸಾಮಾನ್ಯ ಪ್ರಜೆ, ಆಟ ವೀಕ್ಷಿಸಿ.', color: 'role-praja' };
 
 // Base deck for 4 players
@@ -331,7 +331,7 @@ function startPlayPhase() {
         return;
     }
     
-    document.getElementById('police-section-title').textContent = `${searcherRoleName}, ಕಾಳನನ್ನು ಹಿಡಿಯಿರಿ!`;
+    document.getElementById('police-section-title').textContent = `${searcherRoleName}, ಕಳ್ಳನನ್ನು ಹಿಡಿಯಿರಿ!`;
     document.getElementById('police-instruction').innerHTML = `${searcherRoleName} ಆಟಗಾರ: <strong>${searcher.name}</strong>`;
     
     const suspectList = document.getElementById('suspect-list');
@@ -345,7 +345,7 @@ function startPlayPhase() {
                     <div class="suspect-avatar bg-praja">👤</div>
                     <div>
                         <div class="suspect-name">${p.name}</div>
-                        <div class="suspect-hint">ಇವರೇ ಕಾಳ?</div>
+                        <div class="suspect-hint">ಇವರೇ ಕಳ್ಳ?</div>
                     </div>
                 </div>
             `;
@@ -372,7 +372,7 @@ function accuseKala(suspectId) {
         searchResult.className = 'search-result success';
         searchResult.innerHTML = `
             <h4>🎉 ಯಶಸ್ವಿ ಕಾರ್ಯಾಚರಣೆ!</h4>
-            <p><strong>${suspect.name}</strong> ನಿಜವಾದ ಕಾಳ!</p>
+            <p><strong>${suspect.name}</strong> ನಿಜವಾದ ಕಳ್ಳ!</p>
         `;
         setTimeout(() => calculateRoundScores(true), 2500);
     } else {

@@ -41,8 +41,8 @@ let gameState = {
 
 // Roles Definition
 const ROLE_RAJA = { id: 'raja', name: 'ರಾಜ', points: 1000, icon: '👑', desc: 'ನೀವು ರಾಜ್ಯದ ಒಡೆಯ.', color: 'role-raja' };
-const ROLE_MANTRI = { id: 'mantri', name: 'ಮಂತ್ರಿ', points: 800, icon: '🧙', desc: 'ಕಳ್ಳನನ್ನು ಪತ್ತೆಹಚ್ಚಿ.', color: 'role-mantri' };
-const ROLE_POLICE = { id: 'police', name: 'ಪೋಲೀಸ್', points: 500, icon: '🚔', desc: 'ಕಾಳನನ್ನು ಬಂಧಿಸಿ.', color: 'role-police' };
+const ROLE_MANTRI = { id: 'mantri', name: 'ಮಂತ್ರಿ', points: 800, icon: '💂', desc: 'ಕಳ್ಳನನ್ನು ಪತ್ತೆಹಚ್ಚಿ.', color: 'role-mantri' };
+const ROLE_POLICE = { id: 'police', name: 'ಪೋಲೀಸ್', points: 500, icon: '🚨', desc: 'ಕಳ್ಳನನ್ನು ಬಂಧಿಸಿ.', color: 'role-police' };
 const ROLE_KALA = { id: 'kala', name: 'ಕಳ್ಳ', points: 0, icon: '💰', desc: 'ಸಿಕ್ಕಿಬೀಳದಂತೆ ಜಾಗರೂಕರಾಗಿರಿ!', color: 'role-kala' };
 const ROLE_PRAJA = { id: 'praja', name: 'ಪ್ರಜೆ', points: 200, icon: '🧑‍🌾', desc: 'ಸಾಮಾನ್ಯ ಪ್ರಜೆ, ಆಟ ವೀಕ್ಷಿಸಿ.', color: 'role-praja' };
 

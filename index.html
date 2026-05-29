@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="kn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🥷 and 🚨 - Kalla Police Game</title>
-    <meta name="description" content="ಕಳ್ಳ ಪೋಲೀಸ್ ಆಟ">
+    <meta name="description" content="ಕಳ್ಳ ಪೋಲೀಸ್ ಆಟ — Raja, Rani, Senapati, Sahukara, Police, Kalla, Pocket Chora">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Three.js for photorealistic paper animation -->
+    <script src="js/three.min.js"></script>
 </head>
+
 <body>
     <!-- Particle Background -->
     <div id="particles-container"></div>
-    
+
     <!-- SCREEN 1: Welcome / Title Screen -->
     <div id="screen-welcome" class="screen active">
         <div class="welcome-scene">
@@ -30,7 +37,7 @@
                     <span class="title-kala">💰</span>
                     <span class="title-police">🥷</span>
                 </h1>
-                <p class="game-subtitle">ರಾಜ • ಮಂತ್ರಿ • ಕಳ್ಳ • ಪೋಲೀಸ್</p>
+                <p class="game-subtitle">ರಾಜ • ರಾಣಿ • ಸೇನಾಪತಿ • ಸಾಹುಕಾರ • ಕಳ್ಳ • ಪೋಲೀಸ್ • ಪಾಕೆಟ್ ಚೋರ</p>
                 <div class="welcome-desc">
                     <p>ರಹಸ್ಯ ಪಾತ್ರಗಳು • ನಿಗೂಢ ಪಾಸ್‌ವರ್ಡ್ • ರೋಮಾಂಚಕ ಆಟ</p>
                 </div>
@@ -51,37 +58,103 @@
             <h2>📖 ಆಟದ ನಿಯಮಗಳು</h2>
         </div>
         <div class="rules-container">
-            <div class="rules-grid">
-                <div class="rule-card">
+            <div class="rules-grid rules-grid-3">
+
+                <!-- Raja -->
+                <div class="rule-card raja-card">
                     <div class="rule-icon">👑</div>
                     <h3>ರಾಜ (1000 ಅಂಕ)</h3>
-                    <p>ರಾಜನು ತನ್ನನ್ನು ಬಹಿರಂಗಪಡಿಸುತ್ತಾನೆ. ಪ್ರತಿ ರೌಂಡ್‌ನಲ್ಲಿ 1000 ಅಂಕ ಗಳಿಸುತ್ತಾನೆ.</p>
+                    <p>ಪ್ರತಿ ರೌಂಡ್‌ನಲ್ಲಿ 1000 ಅಂಕ ಗಳಿಸುತ್ತಾನೆ (ಗುಪ್ತವಾಗಿರುತ್ತಾನೆ).</p>
                 </div>
-                <div class="rule-card">
-                    <div class="rule-icon">🧙</div>
+
+                <!-- Rani -->
+                <div class="rule-card rani-card">
+                    <div class="rule-icon">👸</div>
+                    <h3>ರಾಣಿ (900 ಅಂಕ)</h3>
+                    <p>ರಾಜನ ಕೆಳಗೆ ಎರಡನೇ ಅತ್ಯುನ್ನತ ಸ್ಥಾನ. (ಗುಪ್ತವಾಗಿರುತ್ತಾಳೆ).</p>
+                </div>
+
+                <!-- Mantri -->
+                <div class="rule-card mantri-card">
+                    <div class="rule-icon">💂</div>
                     <h3>ಮಂತ್ರಿ (800 ಅಂಕ)</h3>
-                    <p>ಮಂತ್ರಿಗ 800 ಅಂಕ ಗಳಿಸುತ್ತಾನೆ.</p>
+                    <p>ರಾಜ್ಯ ಮಂತ್ರಿ. ಕಳ್ಳನನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಹಿಡಿದರೆ 800 ಅಂಕ ಗಳಿಸುತ್ತಾರೆ.</p>
                 </div>
-                <div class="rule-card">
+
+                <!-- Senapati -->
+                <div class="rule-card senapati-card">
+                    <div class="rule-icon">⚔️</div>
+                    <h3>ಸೇನಾಪತಿ (700 ಅಂಕ)</h3>
+                    <p>ಪೋಲೀಸ್‌ಗೆ ಸಹಾಯ ಮಾಡುತ್ತಾರೆ. ರಾಜನು ನೇರವಾಗಿ ಸೇನಾಪತಿಯನ್ನು ಕಳ್ಳನನ್ನು ಹಿಡಿಯಲು ಕಳಿಸಬಹುದು.</p>
+                </div>
+
+                <!-- Sahukara -->
+                <div class="rule-card sahukara-card">
+                    <div class="rule-icon">💰</div>
+                    <h3>ಸಾಹುಕಾರ (600 ಅಂಕ)</h3>
+                    <p>ಶ್ರೀಮಂತ ವ್ಯಾಪಾರಿ. ಸುಮ್ಮನಿದ್ದು ಪೋಲೀಸ್ ಗೊಂದಲಕ್ಕೆ ಕಾರಣವಾಗಿ ಅಂಕ ಗಳಿಸಿ.</p>
+                </div>
+
+                <!-- Police -->
+                <div class="rule-card police-card">
                     <div class="rule-icon">🚔</div>
                     <h3>ಪೋಲೀಸ್ (500 ಅಂಕ)</h3>
-                    <p>ಪೋಲೀಸ್ ಕಳ್ಳನನ್ನು ಹಿಡಿಯಬಹುದು. ಯಶಸ್ವಿಯಾದರೆ 500 ಅಂಕ ಗಳಿಸುತ್ತಾನೆ.</p>
+                    <p>ಕಳ್ಳನನ್ನು ಬಂಧಿಸಿ 500 ಅಂಕ ಗಳಿಸಿ. ತಪ್ಪಿದರೆ ಕಳ್ಳನಿಗೆ ಅಂಕ ಹೋಗುತ್ತದೆ.</p>
                 </div>
-                <div class="rule-card danger-card">
+
+                <!-- Pocket Chora -->
+                <div class="rule-card pocket-chora-card">
+                    <div class="rule-icon">🕵️</div>
+                    <h3>ಪಾಕೆಟ್ ಚೋರ (0 / 400 ಅಂಕ)</h3>
+                    <p>ಚಿಕ್ಕ ಕಳ್ಳ. ಪೋಲೀಸ್ ಮುಖ್ಯ ಕಳ್ಳ ಮತ್ತು ನಿಮ್ಮನ್ನು ತಪ್ಪಾಗಿ ಗುರುತಿಸಿದರೆ ಅಂಕಗಳು ಬದಲಾಗುತ್ತವೆ!</p>
+                </div>
+
+                <!-- Praja -->
+                <div class="rule-card praja-card">
+                    <div class="rule-icon">🧑‍🌾</div>
+                    <h3>ಪ್ರಜೆ (300 ಅಂಕ)</h3>
+                    <p>ಮುಗ್ಧ ಪ್ರಜೆ. ಪೋಲೀಸ್‌ಗೆ ಗೊಂದಲ ಉಂಟುಮಾಡಿ 300 ಅಂಕ ಗಳಿಸಿ.</p>
+                </div>
+
+                <!-- Kala -->
+                <div class="rule-card danger-card kala-card">
                     <div class="rule-icon">🥷</div>
-                    <h3> ಕಳ್ಳ (0 ಅಂಕ)</h3>
-                    <p>ಕಳ್ಳನು ತನ್ನ ಗುರುತನ್ನು ಮರೆಮಾಚಬೇಕು! ಪೋಲೀಸ್ ತಪ್ಪಾಗಿ ಗುರುತಿಸಿದರೆ 500 ಅಂಕ ಗಳಿಸುತ್ತಾನೆ.</p>
+                    <h3>ಕಳ್ಳ (0 / 500+ ಅಂಕ)</h3>
+                    <p>ತನ್ನ ಗುರುತನ್ನು ಮರೆಮಾಚಿ! ಪೋಲೀಸ್ ತಪ್ಪಾಗಿ ಗುರುತಿಸಿದರೆ ಪೋಲೀಸ್ ಅಂಕ ಗಳಿಸಿ.</p>
+                </div>
+
+            </div>
+
+            <!-- Swap Rule Highlight -->
+            <div class="swap-rule-box">
+                <div class="swap-rule-icon">🔄</div>
+                <div>
+                    <strong>ಅಂಕ ಬದಲಾವಣೆ ನಿಯಮ:</strong>
+                    <p>ಪೋಲೀಸ್ ಮುಖ್ಯ ಕಳ್ಳ ಬದಲಿಗೆ ಪಾಕೆಟ್ ಚೋರನನ್ನು ಹಿಡಿದರೆ — ಕಳ್ಳ ↔ ಪಾಕೆಟ್ ಚೋರ ಅಂಕಗಳು ಬದಲಾಗುತ್ತವೆ!</p>
                 </div>
             </div>
+
             <div class="rules-steps">
                 <h3>🎯 ಆಟದ ಹಂತಗಳು</h3>
                 <div class="step-list">
-                    <div class="step-item"><span class="step-num">1</span><p>ಆಟಗಾರರ ಸಂಖ್ಯೆ ಮತ್ತು ಹೆಸರು ನಮೂದಿಸಿ, ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಸಿ</p></div>
-                    <div class="step-item"><span class="step-num">2</span><p>ಪಾತ್ರ ಪತ್ರಗಳನ್ನು ಶಫಲ್ ಮಾಡಿ ಹಂಚಲಾಗುತ್ತದೆ</p></div>
-                    <div class="step-item"><span class="step-num">3</span><p>ಪ್ರತಿಯೊಬ್ಬ ಆಟಗಾರನು ತನ್ನ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ ಪಾತ್ರ ತಿಳಿಯಬೇಕು</p></div>
-                    <div class="step-item"><span class="step-num">4</span><p>ರಾಜನು ಮೊದಲು ತನ್ನನ್ನು ಘೋಷಿಸುತ್ತಾನೆ</p></div>
-                    <div class="step-item"><span class="step-num">5</span><p>ಮಂತ್ರಿ/ಪೋಲೀಸ್ ಕಳ್ಳನನ್ನು ಗುರುತಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಾರೆ</p></div>
-                    <div class="step-item"><span class="step-num">6</span><p>ಅಂಕಪಟ್ಟಿ ನವೀಕರಿಸಲಾಗುತ್ತದೆ</p></div>
+                    <div class="step-item"><span class="step-num">1</span>
+                        <p>ಆಟಗಾರರ ಸಂಖ್ಯೆ ಮತ್ತು ಹೆಸರು ನಮೂದಿಸಿ, ಪಾಸ್‌ವರ್ಡ್ ಹೊಂದಿಸಿ</p>
+                    </div>
+                    <div class="step-item"><span class="step-num">2</span>
+                        <p>ಪಾತ್ರ ಪತ್ರಗಳನ್ನು ಶಫಲ್ ಮಾಡಿ ಹಂಚಲಾಗುತ್ತದೆ</p>
+                    </div>
+                    <div class="step-item"><span class="step-num">3</span>
+                        <p>ಪ್ರತಿಯೊಬ್ಬ ಆಟಗಾರನು ತನ್ನ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ ಪಾತ್ರ ತಿಳಿಯಬೇಕು (ರಹಸ್ಯ ಪತ್ರ ತೆರೆಯುವ ಅನಿಮೇಷನ್!)</p>
+                    </div>
+                    <div class="step-item"><span class="step-num">4</span>
+                        <p>ಆಟ ಪ್ರಾರಂಭವಾದಾಗ ಯಾವ ಪಾತ್ರವೂ ಬಹಿರಂಗಗೊಳ್ಳುವುದಿಲ್ಲ, ಕೇವಲ ಪೋಲೀಸ್ ಯಾರೆಂದು ತಿಳಿಯುತ್ತದೆ.</p>
+                    </div>
+                    <div class="step-item"><span class="step-num">5</span>
+                        <p>ಪೋಲೀಸ್ ಮಾತ್ರ ಕಳ್ಳನನ್ನು ಗುರುತಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಾರೆ.</p>
+                    </div>
+                    <div class="step-item"><span class="step-num">6</span>
+                        <p>ಅಂಕಪಟ್ಟಿ ನವೀಕರಿಸಲಾಗುತ್ತದೆ (ಪಾಕೆಟ್ ಚೋರ ಗೊಂದಲ ನಿಯಮ ಅನ್ವಯ!)</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,26 +177,58 @@
                     <button class="count-btn" id="btn-count-8" onclick="setPlayerCount(8)">8</button>
                     <button class="count-btn" id="btn-count-9" onclick="setPlayerCount(9)">9</button>
                     <button class="count-btn" id="btn-count-10" onclick="setPlayerCount(10)">10</button>
+                    <button class="count-btn" id="btn-count-11" onclick="setPlayerCount(11)">11</button>
+                    <button class="count-btn" id="btn-count-12" onclick="setPlayerCount(12)">12</button>
+                    <button class="count-btn" id="btn-count-13" onclick="setPlayerCount(13)">13</button>
+                    <button class="count-btn" id="btn-count-14" onclick="setPlayerCount(14)">14</button>
+                    <button class="count-btn" id="btn-count-15" onclick="setPlayerCount(15)">15</button>
+                </div>
+                <div class="custom-count-row">
+                    <label class="custom-count-label">✏️ ಬೇರೆ ಸಂಖ್ಯೆ:</label>
+                    <div class="custom-count-input-wrap">
+                        <button onclick="changePlayerCount(-1)">−</button>
+                        <input type="number" id="custom-player-count" class="custom-count-input"
+                            value="4" min="2" max="99"
+                            oninput="onPlayerCountInput(this.value)"
+                            onchange="onPlayerCountInput(this.value)">
+                        <button onclick="changePlayerCount(1)">+</button>
+                    </div>
                 </div>
             </div>
             <div id="player-forms-container" class="player-forms-container">
                 <!-- Player forms will be generated here -->
             </div>
+            <!-- Role Selector Panel -->
+            <div class="role-selector-panel">
+                <div class="role-selector-header">
+                    <span class="role-selector-title">🎭 ಪಾತ್ರಗಳ ಆಯ್ಕೆ ಮಾಡಿ</span>
+                    <span class="role-selector-hint">🔒 = ಕಡ್ಡಾಯ</span>
+                </div>
+                <div id="role-selector-grid" class="role-selector-grid">
+                    <!-- Role chips rendered by JS -->
+                </div>
+                <div id="role-selector-status" class="role-selector-status"></div>
+            </div>
+
             <div class="setup-actions">
                 <div class="round-setting">
                     <label>ರೌಂಡ್ ಸಂಖ್ಯೆ:</label>
-<div class="round-presets">
-    <button id="round-btn-5" class="round-preset-btn" onclick="setRounds(5)">5</button>
-
-    <button id="round-btn-10" class="round-preset-btn active" onclick="setRounds(10)">10</button>
-
-    <button id="round-btn-20" class="round-preset-btn" onclick="setRounds(20)">20</button>
-
-    <button id="round-btn-50" class="round-preset-btn" onclick="setRounds(50)">50</button>
-</div>
+                    <div class="round-presets">
+                        <button id="round-btn-3"   class="round-preset-btn" onclick="setRounds(3)">3</button>
+                        <button id="round-btn-5"   class="round-preset-btn" onclick="setRounds(5)">5</button>
+                        <button id="round-btn-10"  class="round-preset-btn active" onclick="setRounds(10)">10</button>
+                        <button id="round-btn-15"  class="round-preset-btn" onclick="setRounds(15)">15</button>
+                        <button id="round-btn-20"  class="round-preset-btn" onclick="setRounds(20)">20</button>
+                        <button id="round-btn-25"  class="round-preset-btn" onclick="setRounds(25)">25</button>
+                        <button id="round-btn-50"  class="round-preset-btn" onclick="setRounds(50)">50</button>
+                        <button id="round-btn-100" class="round-preset-btn" onclick="setRounds(100)">100</button>
+                    </div>
                     <div class="round-selector">
                         <button onclick="changeRounds(-1)">−</button>
-                        <span id="round-count">3</span>
+                        <input type="number" id="round-count-input" class="round-count-input"
+                            value="10" min="1"
+                            onchange="onRoundInputChange(this.value)"
+                            oninput="onRoundInputChange(this.value)">
                         <button onclick="changeRounds(1)">+</button>
                     </div>
                 </div>
@@ -143,7 +248,7 @@
             </div>
             <div id="shuffle-status" class="shuffle-status">ಮಿಶ್ರಣ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
             <button class="btn-primary glow-btn hidden" id="btn-start-deal" onclick="startDealPhase()">
-                <span>📬 ಪತ್ರಗಳನ್ನು ಹಂಚಿ</span>
+                <span>🎲 ಪಾತ್ರಗಳನ್ನು ರಹಸ್ಯವಾಗಿ ಹಂಚಿ ಆಟ ಪ್ರಾರಂಭಿಸಿ</span>
             </button>
         </div>
     </div>
@@ -155,6 +260,8 @@
                 <h2 id="turn-player-name">ಆಟಗಾರ 1</h2>
                 <p class="turn-instruction">ಇತರರು ನೋಡದಂತೆ ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ</p>
             </div>
+
+            <!-- CSS 3D Paper (shown before password entry) -->
             <div class="paper-3d-container" id="paper-3d-scene">
                 <div class="paper-3d" id="player-paper-3d">
                     <div class="paper-front">
@@ -169,10 +276,16 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Three.js photorealistic paper canvas (shown after password unlock) -->
+            <div id="paper-three-scene" class="paper-three-scene" style="display:none;"></div>
+
             <div class="password-entry-box" id="password-entry-box">
                 <h3>🔐 ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ</h3>
                 <div class="pwd-input-group">
-                    <input type="password" id="player-password-input" class="pwd-input" placeholder="ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್..." maxlength="20" onkeypress="if(event.key==='Enter') openPaper()">
+                    <input type="password" id="player-password-input" class="pwd-input"
+                        placeholder="ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್..." maxlength="20"
+                        onkeypress="if(event.key==='Enter') openPaper()">
                     <button class="btn-eye" id="pwd-eye-btn" onclick="togglePwdVisibility()">👁</button>
                 </div>
                 <p class="pwd-error hidden" id="pwd-error">❌ ತಪ್ಪಾದ ಪಾಸ್‌ವರ್ಡ್! ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</p>
@@ -180,11 +293,13 @@
                     <span>🔓 ಪತ್ರ ತೆರೆಯಿರಿ</span>
                 </button>
             </div>
+
             <div class="role-revealed-box hidden" id="role-revealed-box">
                 <div class="role-big-icon" id="revealed-role-icon"></div>
                 <h2 id="revealed-role-title"></h2>
                 <p id="revealed-role-desc"></p>
                 <div class="role-points" id="revealed-role-points"></div>
+                <p id="revealed-role-extra" class="role-extra-note" style="display:none;"></p>
                 <button class="btn-primary" id="btn-done-viewing" onclick="doneViewingRole()">
                     <span>✅ ನೋಡಿದೆ, ಮುಂದುವರೆಯಿರಿ</span>
                 </button>
@@ -199,25 +314,17 @@
                 <div class="round-badge" id="round-badge">ರೌಂಡ್ 1</div>
                 <h2>🎯 ಸುತ್ತಿನ ಆಟ</h2>
             </div>
-            <!-- Raja Reveal Section -->
-            <div id="raja-section" class="phase-section">
-                <div class="phase-icon">👑</div>
-                <h3>ರಾಜನ ಘೋಷಣೆ</h3>
-                <p id="raja-announcement-text">ರಾಜನು ಯಾರು?</p>
-                <div id="raja-reveal-area" class="reveal-area">
-                    <!-- Raja reveals themselves -->
-                </div>
-                <button class="btn-primary" id="btn-raja-revealed" onclick="rajaRevealed()">
-                    <span>👑 ರಾಜ ಘೋಷಿಸಿದ್ದಾರೆ</span>
-                </button>
+
+            <!-- Raja + Rani Reveal Section (Removed/Hidden) -->
+            <div id="raja-section" class="phase-section hidden" style="display:none;">
             </div>
 
             <!-- Police Search Section -->
             <div id="police-section" class="phase-section hidden">
-                <div class="phase-icon">🚔</div>
+                <div class="phase-icon">🚨</div>
                 <h3 id="police-section-title">ಕಳ್ಳನನ್ನು ಹಿಡಿಯಿರಿ!</h3>
                 <p id="police-instruction">ಪೋಲೀಸ್ ಆಟಗಾರ: <strong id="police-player-name"></strong></p>
-                <p class="search-hint">ಕಳ್ಳ ಯಾರು ಎಂದು ಯೋಚಿಸಿ ಆಯ್ಕೆ ಮಾಡಿ:</p>
+                <p class="search-hint">ಪಾತ್ರಗಳು ಗುಪ್ತ! ಕಳ್ಳ ಯಾರು ೆಂದು ತರ್ಕಿಸಿ ಆಯ್ಕೆ ಮಾಡಿ:</p>
                 <div id="suspect-list" class="suspect-list">
                     <!-- Suspects listed here -->
                 </div>
@@ -273,6 +380,9 @@
     <!-- Notification Toast -->
     <div id="toast" class="toast hidden"></div>
 
+    <!-- Scripts -->
+    <script src="js/paper-animation.js"></script>
     <script src="js/game.js"></script>
 </body>
+
 </html>

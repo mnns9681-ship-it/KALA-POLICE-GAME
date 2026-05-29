@@ -1,10 +1,10 @@
 // Sound System
 const sounds = {
-    bgm: new Audio('https://actions.google.com/sounds/v1/science_fiction/spaceship_engine_idle.ogg'),
-    shuffle: new Audio('https://actions.google.com/sounds/v1/foley/playing_cards_shuffle.ogg'),
-    open: new Audio('https://actions.google.com/sounds/v1/foley/paper_rip.ogg'),
-    success: new Audio('https://actions.google.com/sounds/v1/crowds/crowd_cheer.ogg'),
-    fail: new Audio('https://actions.google.com/sounds/v1/cartoon/slip_and_fall.ogg')
+    bgm: new Audio('assets/music/detective.mp3'),
+    shuffle: new Audio('assets/music/shuffle.mp3'),
+    open: new Audio('assets/music/open-paper.mp3'),
+    success: new Audio('assets/music/victory.mp3'),
+    fail: new Audio('assets/music/fail.mp3')
 };
 sounds.bgm.loop = true;
 sounds.bgm.volume = 0.2;

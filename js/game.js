@@ -1,10 +1,10 @@
 // Sound System
 const sounds = {
-    bgm: new Audio('assets/music/detective.mp3'),
-    shuffle: new Audio('assets/music/shuffle.mp3'),
-    open: new Audio('assets/music/open-paper.mp3'),
-    success: new Audio('assets/music/victory.mp3'),
-    fail: new Audio('assets/music/fail.mp3')
+    bgm: new Audio('https://actions.google.com/sounds/v1/science_fiction/spaceship_engine_idle.ogg'),
+    shuffle: new Audio('https://actions.google.com/sounds/v1/foley/playing_cards_shuffle.ogg'),
+    open: new Audio('https://actions.google.com/sounds/v1/foley/paper_rip.ogg'),
+    success: new Audio('https://actions.google.com/sounds/v1/crowds/crowd_cheer.ogg'),
+    fail: new Audio('https://actions.google.com/sounds/v1/cartoon/slip_and_fall.ogg')
 };
 sounds.bgm.loop = true;
 sounds.bgm.volume = 0.2;
@@ -408,7 +408,7 @@ function beginGame() {
             showToast('ದಯವಿಟ್ಟು ಎಲ್ಲಾ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್‌ಗಳನ್ನು ನಮೂದಿಸಿ!');
             return;
         }
-        gameState.players.push({ id: i - 1, name, pwd, role: null });
+        gameState.players.push({ id: i - 1, name, pwd, role: null, roundScores: [] });
         gameState.scores[i - 1] = 0;
     }
 
@@ -897,6 +897,8 @@ function calculateRoundScores(result) {
         }
 
         gameState.scores[p.id] += pts;
+        if (!p.roundScores) p.roundScores = [];
+        p.roundScores.push(pts);
 
         scoreList.innerHTML += `
             <div class="round-score-item">
@@ -935,36 +937,118 @@ function nextRound() {
 function showScoreboard() {
     gameState.currentPhase = 'result';
     const list = document.getElementById('scoreboard-list');
-    list.innerHTML = '';
-
+    
+    // Sort players by total score descending
     let sortedPlayers = [...gameState.players].sort((a, b) => gameState.scores[b.id] - gameState.scores[a.id]);
 
-    sortedPlayers.forEach((p, index) => {
-        let rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : 'rank-other';
-        let rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1);
+    // Find the max rounds played across players to render column count robustly
+    let maxRoundsPlayed = 0;
+    sortedPlayers.forEach(p => {
+        if (p.roundScores && p.roundScores.length > maxRoundsPlayed) {
+            maxRoundsPlayed = p.roundScores.length;
+        }
+    });
 
-        list.innerHTML += `
-            <div class="score-entry ${rankClass}">
-                <div class="score-rank ${rankClass}">${rankIcon}</div>
-                <div class="score-avatar bg-praja">${p.role ? p.role.icon : '👤'}</div>
-                <div class="score-info">
-                    <div class="score-name">${p.name}</div>
-                    <div class="score-sub">${p.role ? p.role.name : ''}</div>
+    // Build the table HTML with responsive container (Vertical round layout)
+    let tableHtml = `
+        <div class="table-responsive">
+            <table class="scoreboard-table">
+                <thead>
+                    <tr>
+                        <th style="min-width: 90px; text-align: center;">ರೌಂಡ್</th>
+    `;
+    
+    // Column header for each player
+    sortedPlayers.forEach((p, index) => {
+        let rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1);
+        tableHtml += `
+            <th style="min-width: 120px;">
+                <div class="table-player-header">
+                    <span class="rank-badge">${rankIcon}</span>
+                    <span class="role-icon-inline">${p.role ? p.role.icon : '👤'}</span>
+                    <span class="player-name-inline" title="${p.name}">${p.name}</span>
                 </div>
-                <div>
-                    <div class="score-total">${gameState.scores[p.id]}</div>
-                    <div class="score-total-label">ಒಟ್ಟು ಅಂಕ</div>
-                </div>
-            </div>
+            </th>
         `;
     });
+    
+    tableHtml += `
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
+    // Row for each round (Rounds listed vertically)
+    for (let r = 1; r <= maxRoundsPlayed; r++) {
+        tableHtml += `
+            <tr>
+                <td class="round-num-cell">ರೌಂಡ್ ${r}</td>
+        `;
+        
+        sortedPlayers.forEach(p => {
+            let roundPts = (p.roundScores && p.roundScores[r - 1] !== undefined) ? p.roundScores[r - 1] : 0;
+            let ptsClass = roundPts > 0 ? 'earned' : 'zero';
+            tableHtml += `
+                <td class="score-cell-pts ${ptsClass}">${roundPts > 0 ? '+' + roundPts : roundPts}</td>
+            `;
+        });
+        
+        tableHtml += `
+            </tr>
+        `;
+    }
+
+    // Row for Total Score (ಒಟ್ಟು ಅಂಕ)
+    tableHtml += `
+        <tr class="total-row">
+            <td class="round-num-cell">ಒಟ್ಟು ಅಂಕ</td>
+    `;
+    
+    sortedPlayers.forEach(p => {
+        tableHtml += `
+            <td class="score-total">${gameState.scores[p.id]}</td>
+        `;
+    });
+    
+    tableHtml += `
+        </tr>
+    `;
+
+    // Row for Final Rank (ಸ್ಥಾನ)
+    tableHtml += `
+        <tr class="rank-row">
+            <td class="round-num-cell">ಸ್ಥಾನ</td>
+    `;
+    
+    sortedPlayers.forEach((p, index) => {
+        let rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1);
+        let rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : 'rank-other';
+        tableHtml += `
+            <td class="score-rank ${rankClass}">${rankIcon}</td>
+        `;
+    });
+    
+    tableHtml += `
+        </tr>
+    `;
+
+    tableHtml += `
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    list.innerHTML = tableHtml;
 
     showScreen('screen-scoreboard');
     triggerConfetti();
 }
 
 function playAgain() {
-    gameState.players.forEach(p => gameState.scores[p.id] = 0);
+    gameState.players.forEach(p => {
+        gameState.scores[p.id] = 0;
+        p.roundScores = [];
+    });
     gameState.roundNumber = 1;
     startRound();
 }
